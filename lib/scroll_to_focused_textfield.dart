@@ -17,13 +17,11 @@ class ScrollToFocusedTextField extends StatefulWidget {
   const ScrollToFocusedTextField({Key? key,
     required this.child,
     this.enable = true,
-    this.offsetSize = 35,
     this.duration = const Duration(milliseconds: 100),
     this.curve = Curves.linear,
   }) : super(key: key);
   final Widget child;
   final bool enable;
-  final double offsetSize;
   final Duration duration;
   final Curve curve;
   @override
