@@ -12,6 +12,7 @@ import 'package:flutter/scheduler.dart';
 ///
 ///          注意：输入框必须在可滚动组件内
 ///
+/// prevents TextField from being obscured by the keyboard.
 
 class ScrollToFocusedTextField extends StatefulWidget {
   const ScrollToFocusedTextField({Key? key,

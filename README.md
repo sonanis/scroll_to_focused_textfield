@@ -1,27 +1,17 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+prevents TextField from being obscured by the keyboard.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```
+dependencies:
+  scroll_to_focused_textfield:
+    git:
+      url: https://github.com/sonanis/scroll_to_focused_textfield
+```
 
 ## Usage
 
@@ -29,11 +19,64 @@ TODO: Include short and useful examples for package users. Add longer examples
 to `/example` folder. 
 
 ```dart
-const like = 'sample';
+import 'package:flutter/material.dart';
+import 'package:scroll_to_focused_textfield/scroll_to_focused_textfield.dart';
+
+class TestScrollToFocused extends StatefulWidget {
+  const TestScrollToFocused({Key? key}) : super(key: key);
+
+  @override
+  State<TestScrollToFocused> createState() => _TestScrollToFocusedState();
+}
+
+class _TestScrollToFocusedState extends State<TestScrollToFocused> {
+  @override
+  Widget build(BuildContext context) {
+    return ScrollToFocusedTextField(
+      child: Scaffold(
+        /// sometimes we ware demanded keep size
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(title: Text('Test'),),
+        /// TextField must be placed in scrollable widget
+        body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Column(
+            children: [
+              _buildContainer(Colors.red),
+              _buildContainer(Colors.yellow),
+              _buildContainer(Colors.blue),
+              _buildTextField(),
+
+              /// Add an empty widget of height MediaQuery.of(context).viewInsets.bottom
+              Container(
+                height: MediaQuery.of(context).viewInsets.bottom,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(){
+    return Container(
+      height: 150,
+      child: TextField(
+        minLines: 99,
+        maxLines: 999,
+        decoration: InputDecoration(
+          hintText: 'TextField',
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContainer(Color color){
+    return Container(
+      height: 150,
+      color: color,
+    );
+  }
+}
 ```
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
